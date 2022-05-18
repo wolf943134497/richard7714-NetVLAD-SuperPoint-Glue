@@ -12,11 +12,14 @@ with open('pose_valid.pkl', 'rb') as _:
 with open('pose_ref.pkl', 'rb') as _:
     pos_ref = pickle.load(_)
 
-gb = glob.glob('/home/ma/SuperGlue_final/outputs/matched/*.txt')
+gb = glob.glob('/home/ma/Downloads/SuperGlue_final/outputs/matched/*.txt')
 for txt in gb:
     # localization 맞은 횟수
     correct = 0
     total = 0
+
+    filename = txt.split('matched/')[1].split('.txt')[0]
+
 
     # match 결과
     with open(txt, 'rb') as _:
@@ -79,4 +82,4 @@ for txt in gb:
     title = txt.split('matched/')
     ax.set_title(title[1].split('.txt')[0] + '\n' + 'Accuracy : ' + str(round(correct / total, 2) * 100) + '%')
 
-plt.show()
+    plt.savefig(filename)
