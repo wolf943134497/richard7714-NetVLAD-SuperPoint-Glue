@@ -19,11 +19,11 @@ if __name__ == '__main__':
         description='SuperGlue demo',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument(
-        '--input', type=str, default='datasets/hitech/ref',
+        '--input', type=str, default='datasets/hyun_1st/ref',
         help='ID of a USB webcam, URL of an IP camera, '
              'or path to an image directory or movie file')
     parser.add_argument(
-        '--output_dir', type=str, default='outputs/hitech',
+        '--output_dir', type=str, default='outputs/hyun_1st',
         help='Directory where to write output frames (If None, no output)')
 
     parser.add_argument(
@@ -117,7 +117,7 @@ if __name__ == '__main__':
 
     output_image = []  # match개수가 가장 많은 하나의 이미지를 기록할 list
     q_name = []
-    gb = sorted(glob.glob('datasets/hitech/query/*.jpg'))
+    gb = sorted(glob.glob('datasets/hyun_1st/query/*.jpg'))
     for i in range(0, len(gb)):
         q_name.append(gb[i].split('query/')[1])
 
@@ -126,7 +126,7 @@ if __name__ == '__main__':
     file_generated = False
 
     for idx in index:
-        impath = 'datasets/hitech/query/' + str(idx)
+        impath = 'datasets/hyun_1st/query/' + str(idx)
         query = vs.load_image(str(impath))
 
         frame_tensor = frame2tensor(query, device)
@@ -152,7 +152,7 @@ if __name__ == '__main__':
         match_num = []  # matching ratio 기록
 
         for it in mydict[impath.split('query/')[1]]:
-            ref_path = 'datasets/hitech/ref/' + it
+            ref_path = 'datasets/hyun_1st/ref/' + it
             frame = vs.load_image(ref_path)
 
             timer.update('data')
